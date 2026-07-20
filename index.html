@@ -81,22 +81,33 @@
   .cat-block { margin-bottom: 18px; }
   .cat-block.hidden { display: none; }
 
+  /* カテゴリー別カラー */
+  .cat-block[data-cat="license"]  { --cat-color: #e8820c; }
+  .cat-block[data-cat="corp"]     { --cat-color: #3949ab; }
+  .cat-block[data-cat="contract"] { --cat-color: #0d9488; }
+  .cat-block[data-cat="inherit"]  { --cat-color: #7c3aed; }
+  .cat-block[data-cat="car"]      { --cat-color: #e11d48; }
+  .cat-block[data-cat="visa"]     { --cat-color: #1d74d0; }
+  .cat-block[data-cat="subsidy"]  { --cat-color: #059669; }
+  .cat-block[data-cat="other"]    { --cat-color: #64748b; }
+
   .cat-heading {
     display: flex; align-items: center; gap: 8px;
     padding: 4px 4px 8px;
   }
   .cat-heading-emoji { font-size: 22px; }
   .cat-heading-text {
-    font-size: 20px; font-weight: 700; color: #333;
+    font-size: 20px; font-weight: 700; color: var(--cat-color, #333);
   }
   .cat-heading-count {
-    font-size: 13px; color: #fff; background: #06C755;
+    font-size: 13px; color: #fff; background: var(--cat-color, #06C755);
     border-radius: 10px; padding: 2px 8px; font-weight: 700;
   }
 
   .service-card {
     background: white;
     border-radius: 12px;
+    border: 2px solid var(--cat-color, #eee);
     box-shadow: 0 1px 3px rgba(0,0,0,0.07);
     overflow: hidden;
   }
