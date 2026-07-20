@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>行政書士業務のご案内</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
+    background: #f0f0f0;
+    color: #222;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding-bottom: 40px;
+  }
+
+  /* ─── HEADER ─── */
+  .header {
+    background: #06C755;
+    color: white;
+    padding: 16px 16px 12px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .header-icon {
+    width: 36px; height: 36px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; flex-shrink: 0;
+  }
+  .header h1 { font-size: 21px; font-weight: 700; line-height: 1.3; }
+  .header-sub { font-size: 11px; opacity: 0.85; margin-top: 1px; }
+
+  /* ─── CATEGORY GRID ─── */
+  .category-section {
+    background: white;
+    padding: 14px 12px 12px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .category-label {
+    font-size: 12px; font-weight: 700; color: #888;
+    margin-bottom: 10px; letter-spacing: 0.03em;
+  }
+  .category-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .cat-tile {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 12px;
+    border-radius: 12px;
+    border: 2px solid #eee;
+    background: #fafafa;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+  }
+  .cat-tile.full-width { grid-column: 1 / -1; }
+  .cat-tile-emoji { font-size: 22px; flex-shrink: 0; }
+  .cat-tile-text  { font-size: 16px; font-weight: 600; color: #333; line-height: 1.3; }
+  .cat-tile-sub   { font-size: 12px; color: #999; margin-top: 1px; }
+
+  .cat-tile.active { border-color: #06C755; background: #f0faf4; }
+  .cat-tile.active .cat-tile-text { color: #00884a; }
+
+  /* ─── SERVICE LIST ─── */
+  .list-area { padding: 12px; }
+
+  .cat-block { margin-bottom: 18px; }
+  .cat-block.hidden { display: none; }
+
+  .cat-heading {
+    display: flex; align-items: center; gap: 8px;
+    padding: 4px 4px 8px;
+  }
+  .cat-heading-emoji { font-size: 20px; }
+  .cat-heading-text {
+    font-size: 17px; font-weight: 700; color: #333;
+  }
+  .cat-heading-count {
+    font-size: 12px; color: #fff; background: #06C755;
+    border-radius: 10px; padding: 2px 8px; font-weight: 700;
+  }
+
+  .service-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+    overflow: hidden;
+  }
+  .service-item {
+    padding: 12px 14px;
+    border-bottom: 1px solid #f2f2f2;
+  }
+  .service-item:last-child { border-bottom: none; }
+  .service-title {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 15.5px; font-weight: 600; color: #333;
+    line-height: 1.45;
+  }
+  .service-check {
+    color: #06C755; font-weight: 700; font-size: 15px;
+    flex-shrink: 0;
+  }
+  .service-desc {
+    font-size: 13px; color: #777; line-height: 1.55;
+    margin-top: 3px; padding-left: 23px;
+  }
+  .service-cond {
+    margin: 6px 0 2px 23px;
+    font-size: 12.5px; color: #b85a00; line-height: 1.55;
+    background: #fff7ef; border-radius: 6px;
+    padding: 5px 9px;
+  }
+  .service-cond::before {
+    content: '📌 '; font-size: 11px;
+  }
+
+  /* ─── FOOTER NOTE ─── */
+  .footer-note {
+    margin: 20px 12px 0;
+    background: #e6f9ee;
+    border: 1px solid #b2e8cb;
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+  }
+  .footer-note-title {
+    font-size: 15px; font-weight: 700; color: #00884a;
+    margin-bottom: 6px;
+  }
+  .footer-note-text {
+    font-size: 13px; color: #444; line-height: 1.7;
+  }
+  .footer-disclaimer {
+    margin: 14px 16px 0;
+    font-size: 11px; color: #999; line-height: 1.6;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="header-icon">📋</div>
+    <div>
+      <h1>行政書士業務のご案内</h1>
+      <div class="header-sub">ご依頼・ご相談いただける業務の一覧です</div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY GRID -->
+<div class="category-section">
+  <div class="category-label">カテゴリーから探す</div>
+  <div class="category-grid">
+    <div class="cat-tile full-width active" data-cat="all" onclick="filterCategory('all', this)">
+      <span class="cat-tile-emoji">📋</span>
+      <div><div class="cat-tile-text">すべて見る</div></div>
+    </div>
+    <div class="cat-tile" data-cat="license" onclick="filterCategory('license', this)">
+      <span class="cat-tile-emoji">🏗️</span>
+      <div><div class="cat-tile-text">許認可申請</div><div class="cat-tile-sub">建設業・飲食店など</div></div>
+    </div>
+    <div class="cat-tile" data-cat="corp" onclick="filterCategory('corp', this)">
+      <span class="cat-tile-emoji">🏢</span>
+      <div><div class="cat-tile-text">法人設立支援</div><div class="cat-tile-sub">定款・NPO法人など</div></div>
+    </div>
+    <div class="cat-tile" data-cat="contract" onclick="filterCategory('contract', this)">
+      <span class="cat-tile-emoji">📝</span>
+      <div><div class="cat-tile-text">契約書・書類作成</div><div class="cat-tile-sub">契約書・内容証明など</div></div>
+    </div>
+    <div class="cat-tile" data-cat="inherit" onclick="filterCategory('inherit', this)">
+      <span class="cat-tile-emoji">🕊️</span>
+      <div><div class="cat-tile-text">相続・遺言</div><div class="cat-tile-sub">遺言書・遺産分割など</div></div>
+    </div>
+    <div class="cat-tile" data-cat="car" onclick="filterCategory('car', this)">
+      <span class="cat-tile-emoji">🚗</span>
+      <div><div class="cat-tile-text">自動車関連手続</div><div class="cat-tile-sub">車庫証明・運送業許可</div></div>
+    </div>
+    <div class="cat-tile" data-cat="visa" onclick="filterCategory('visa', this)">
+      <span class="cat-tile-emoji">🌏</span>
+      <div><div class="cat-tile-text">外国人・在留資格</div><div class="cat-tile-sub">ビザ・帰化申請など</div></div>
+    </div>
+    <div class="cat-tile" data-cat="subsidy" onclick="filterCategory('subsidy', this)">
+      <span class="cat-tile-emoji">💰</span>
+      <div><div class="cat-tile-text">補助金・事業支援</div><div class="cat-tile-sub">申請書類の作成支援</div></div>
+    </div>
+    <div class="cat-tile" data-cat="other" onclick="filterCategory('other', this)">
+      <span class="cat-tile-emoji">📄</span>
+      <div><div class="cat-tile-text">その他の業務</div><div class="cat-tile-sub">官公署提出書類など</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE LIST -->
+<div class="list-area">
+
+  <div class="cat-block" data-cat="license">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">🏗️</span>
+      <span class="cat-heading-text">許認可申請</span>
+      <span class="cat-heading-count">7件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>建設業許可申請</div>
+        <div class="service-desc">500万円以上(建築一式は1,500万円以上)の工事を請け負うために必要な許可です。</div>
+        <div class="service-cond">主な条件:経営経験5年以上の役員がいること・専任技術者がいること・自己資本500万円以上など</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>産業廃棄物収集運搬業許可申請</div>
+        <div class="service-desc">産業廃棄物を収集・運搬する事業を行うために必要な許可です。</div>
+        <div class="service-cond">主な条件:講習会を修了した役員等がいること・運搬車両を確保していることなど</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>飲食店営業許可申請</div>
+        <div class="service-desc">飲食店やカフェの開業に必要な、保健所への許可申請です。</div>
+        <div class="service-cond">主な条件:食品衛生責任者を置くこと・厨房などの設備が基準を満たすこと</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>古物商許可申請</div>
+        <div class="service-desc">中古品の買取・販売・リサイクルビジネスに必要な許可です。</div>
+        <div class="service-cond">主な条件:破産手続中の方や一定の犯罪歴のある方などは取得できません</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>旅館業・民泊関係の許可申請</div>
+        <div class="service-desc">ホテル・旅館・民泊の運営に必要な許可や届出の手続きです。</div>
+        <div class="service-cond">主な条件:建物の立地(用途地域)や消防設備の基準あり・民泊は年180日までの営業制限</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>風俗営業許可申請</div>
+        <div class="service-desc">スナック・バー・麻雀店など、風営法の対象となる営業の許可です。</div>
+        <div class="service-cond">主な条件:学校・病院などの近くでは営業できないなど、場所の制限があります</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>各種許認可の更新・変更届</div>
+        <div class="service-desc">取得済みの許認可の更新や、役員・所在地変更などの届出を行います。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block" data-cat="corp">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">🏢</span>
+      <span class="cat-heading-text">法人設立・会社運営支援</span>
+      <span class="cat-heading-count">2件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>一般社団法人・NPO法人の設立支援</div>
+        <div class="service-desc">非営利法人の設立に必要な書類作成や手続きをお手伝いします。</div>
+        <div class="service-cond">主な条件:NPO法人は社員(会員)10名以上が必要など、法人の種類ごとに要件があります</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>定款作成</div>
+        <div class="service-desc">会社・法人の基本ルールを定める「定款」を作成します。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block" data-cat="contract">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">📝</span>
+      <span class="cat-heading-text">契約書・各種書類作成</span>
+      <span class="cat-heading-count">4件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>業務委託契約書</div>
+        <div class="service-desc">外注や業務委託の条件を明確にし、トラブルを防ぐ契約書を作成します。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>売買契約書</div>
+        <div class="service-desc">商品や不動産などの売買条件をきちんと書面に残します。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>内容証明郵便</div>
+        <div class="service-desc">請求や通知を「いつ・誰が・何を送ったか」証拠に残る形で送付します。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>示談書の作成</div>
+        <div class="service-desc">当事者間で合意した内容を、後日のトラブル防止のため書面にします。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block" data-cat="inherit">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">🕊️</span>
+      <span class="cat-heading-text">相続・遺言</span>
+      <span class="cat-heading-count">5件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>遺言書作成支援</div>
+        <div class="service-desc">ご自身の想いをかたちにする遺言書の作成をお手伝いします。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>相続人調査</div>
+        <div class="service-desc">戸籍をたどり、誰が相続人になるのかを正確に確定します。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>戸籍収集</div>
+        <div class="service-desc">相続手続きに必要な戸籍謄本などを代わりにお集めします。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>遺産分割協議書の作成</div>
+        <div class="service-desc">相続人全員で話し合った遺産の分け方を、正式な書面にまとめます。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>各種名義変更手続の支援</div>
+        <div class="service-desc">相続にともなう預貯金・自動車などの名義変更をサポートします。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block" data-cat="car">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">🚗</span>
+      <span class="cat-heading-text">自動車関連手続</span>
+      <span class="cat-heading-count">2件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>車庫証明</div>
+        <div class="service-desc">車の購入時などに必要な、保管場所を証明する警察署への申請です。</div>
+        <div class="service-cond">主な条件:自宅など使用の本拠から2km以内に保管場所を確保していること</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>運送業許可申請</div>
+        <div class="service-desc">トラック運送など、運送事業を始めるために必要な許可です。</div>
+        <div class="service-cond">主な条件:事業用トラック5台以上・運行管理者の確保・一定の自己資金など</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block" data-cat="visa">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">🌏</span>
+      <span class="cat-heading-text">外国人・在留資格関係</span>
+      <span class="cat-heading-count">5件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>在留資格認定証明書交付申請</div>
+        <div class="service-desc">海外にいる外国人を日本に呼び寄せる際に必要な手続きです。</div>
+        <div class="service-cond">主な条件:学歴・職歴や仕事の内容が、在留資格ごとの基準を満たしていること</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>在留資格変更申請</div>
+        <div class="service-desc">「留学」から「就労」など、在留資格を切り替える手続きです。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>永住許可申請</div>
+        <div class="service-desc">日本での永住を希望する方の申請をサポートします。</div>
+        <div class="service-cond">主な条件:原則として引き続き10年以上日本に住んでいること・安定した収入があることなど</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>帰化申請支援</div>
+        <div class="service-desc">日本国籍の取得を希望する方の手続きをお手伝いします。</div>
+        <div class="service-cond">主な条件:引き続き5年以上日本に住んでいること・生計が安定していることなど</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>外国人雇用に関する手続支援</div>
+        <div class="service-desc">外国人スタッフを採用する企業に必要な手続きをサポートします。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block" data-cat="subsidy">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">💰</span>
+      <span class="cat-heading-text">補助金・事業支援</span>
+      <span class="cat-heading-count">2件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>補助金申請書類の作成支援</div>
+        <div class="service-desc">補助金の申請に必要な書類づくりをお手伝いします。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>各種行政手続の相談</div>
+        <div class="service-desc">「どこに何を出せばいい?」という段階からご相談いただけます。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cat-block" data-cat="other">
+    <div class="cat-heading">
+      <span class="cat-heading-emoji">📄</span>
+      <span class="cat-heading-text">その他</span>
+      <span class="cat-heading-count">3件</span>
+    </div>
+    <div class="service-card">
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>官公署へ提出する書類の作成</div>
+        <div class="service-desc">役所や警察署などに提出する書類全般の作成を代行します。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>権利義務に関する書類の作成</div>
+        <div class="service-desc">契約や合意など、権利・義務に関わる書類を作成します。</div>
+      </div>
+      <div class="service-item">
+        <div class="service-title"><span class="service-check">✔</span>各種申請・届出の代理</div>
+        <div class="service-desc">手間のかかる申請・届出の手続きをまとめて代行します。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-note">
+    <div class="footer-note-title">💬 ご相談はLINEのトークからどうぞ</div>
+    <div class="footer-note-text">
+      「この手続きは頼める?」といった<br>
+      ざっくりしたご質問でも大丈夫です。<br>
+      お気軽にメッセージをお送りください。
+    </div>
+  </div>
+
+  <div class="footer-disclaimer">
+    ※ 上記にない手続きについても、まずはお気軽にご相談ください。<br>
+    内容により提携の専門家をご紹介する場合があります。
+  </div>
+
+</div>
+
+<script>
+  function filterCategory(cat, el) {
+    document.querySelectorAll('.cat-tile').forEach(function(t) { t.classList.remove('active'); });
+    el.classList.add('active');
+    document.querySelectorAll('.cat-block').forEach(function(b) {
+      if (cat === 'all' || b.dataset.cat === cat) {
+        b.classList.remove('hidden');
+      } else {
+        b.classList.add('hidden');
+      }
+    });
+    if (cat !== 'all') {
+      var listArea = document.querySelector('.list-area');
+      listArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+</script>
+
+</body>
+</html>
