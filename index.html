@@ -61,19 +61,21 @@
     display: flex; align-items: center; gap: 10px;
     padding: 12px 12px;
     border-radius: 12px;
-    border: 2px solid #eee;
-    background: #fafafa;
+    border: 2px solid var(--cat-color, #eee);
+    background: linear-gradient(rgba(255,255,255,0.93), rgba(255,255,255,0.93)), var(--cat-color, #eee);
     cursor: pointer;
     transition: all 0.15s;
     text-align: left;
   }
   .cat-tile.full-width { grid-column: 1 / -1; }
   .cat-tile-emoji { font-size: 22px; flex-shrink: 0; }
-  .cat-tile-text  { font-size: 20px; font-weight: 600; color: #333; line-height: 1.3; }
-  .cat-tile-sub   { font-size: 13px; color: #999; margin-top: 1px; }
+  .cat-tile-text  { font-size: 20px; font-weight: 600; color: #222; line-height: 1.3; }
+  .cat-tile-sub   { font-size: 13px; color: #888; margin-top: 1px; }
 
-  .cat-tile.active { border-color: #06C755; background: #f0faf4; }
-  .cat-tile.active .cat-tile-text { color: #00884a; }
+  .cat-tile.active {
+    background: linear-gradient(rgba(255,255,255,0.80), rgba(255,255,255,0.80)), var(--cat-color, #06C755);
+    box-shadow: 0 0 0 1px var(--cat-color, #06C755) inset;
+  }
 
   /* ─── SERVICE LIST ─── */
   .list-area { padding: 12px; }
@@ -81,15 +83,16 @@
   .cat-block { margin-bottom: 18px; }
   .cat-block.hidden { display: none; }
 
-  /* カテゴリー別カラー */
-  .cat-block[data-cat="license"]  { --cat-color: #e8820c; }
-  .cat-block[data-cat="corp"]     { --cat-color: #3949ab; }
-  .cat-block[data-cat="contract"] { --cat-color: #0d9488; }
-  .cat-block[data-cat="inherit"]  { --cat-color: #7c3aed; }
-  .cat-block[data-cat="car"]      { --cat-color: #e11d48; }
-  .cat-block[data-cat="visa"]     { --cat-color: #1d74d0; }
-  .cat-block[data-cat="subsidy"]  { --cat-color: #059669; }
-  .cat-block[data-cat="other"]    { --cat-color: #64748b; }
+  /* カテゴリー別カラー(コンテンツ枠・上部タイル共通) */
+  [data-cat="license"]  { --cat-color: #e8820c; }
+  [data-cat="corp"]     { --cat-color: #3949ab; }
+  [data-cat="contract"] { --cat-color: #0d9488; }
+  [data-cat="inherit"]  { --cat-color: #7c3aed; }
+  [data-cat="car"]      { --cat-color: #e11d48; }
+  [data-cat="visa"]     { --cat-color: #1d74d0; }
+  [data-cat="subsidy"]  { --cat-color: #059669; }
+  [data-cat="other"]    { --cat-color: #64748b; }
+  [data-cat="all"]      { --cat-color: #06C755; }
 
   .cat-heading {
     display: flex; align-items: center; gap: 8px;
