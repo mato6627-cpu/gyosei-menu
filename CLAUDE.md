@@ -14,8 +14,12 @@
 |---|---|
 | GitHubアカウント | mato6627-cpu |
 | GitHubリポジトリ | https://github.com/mato6627-cpu/gyosei-menu |
-| 公開URL | https://gyosei-menu.pages.dev (Cloudflare Pages接続後に確定) |
-| デプロイ | GitHub push → Cloudflare Pages 自動反映(1〜2分) |
+| 公開URL | **https://gyosei-menu.mato6627.workers.dev** (固定・共有用) |
+| デプロイ | GitHub push → Cloudflare Workers(静的アセット)自動反映(1〜2分) |
+
+**共有するURLは必ず `https://gyosei-menu.mato6627.workers.dev` を使うこと。**
+Cloudflare側は「Workers & Pages」内のプロジェクト `gyosei-menu`(mato6627-cpu/gyosei-menu に接続)。
+`.assetsignore` で .git・CLAUDE.md 等を公開対象から除外している。
 
 ## Git操作
 ```bash
